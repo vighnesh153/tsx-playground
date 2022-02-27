@@ -1,7 +1,8 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import {bundle} from "./bundler";
-import {debounce} from "./debounce";
+import { bundle } from './bundler';
+import { debounce } from './debounce';
+import { CodeEditor } from './CodeEditor';
 
 const html = `
 <!DOCTYPE html>
@@ -41,35 +42,44 @@ function Iframe({ outputCode }: { outputCode: string }) {
     }, 50);
   }, [outputCode]);
 
-  return <iframe ref={iframeRef} srcDoc={html} />;
+  return <iframe title="preview" style={{width: '100%'}} ref={iframeRef} srcDoc={html} />;
 }
 
 function App() {
-  const [inputCode, setInputCode] = useState("");
+  const [inputCode, setInputCode] = useState('');
   const [outputCode, setOutputCode] = useState('');
+  const [bundling, setBundling] = useState(false);
+  const [error, setError] = useState('');
 
-  const debouncedBundle = useCallback(debounce(async (inputCode: string) => {
-    const { outputCode, error } = await bundle(inputCode);
-    setOutputCode(outputCode);
-    console.log(outputCode);
-  }, 2000), []);
+  const debouncedBundle = useCallback(
+    debounce(async (inputCode: string) => {
+      const { outputCode, error } = await bundle(inputCode);
+      setOutputCode(outputCode);
+      setError(error);
+      setBundling(false);
+    }, 2000),
+    []
+  );
 
   // compile the code on change
   useEffect(() => {
+    setBundling(true);
     debouncedBundle(inputCode);
   }, [debouncedBundle, inputCode]);
 
   return (
-    <div>
-      <textarea style={{
-        width: 600,
-        height: 400
-      }} value={inputCode} onChange={e => setInputCode(e.target.value)} />
-
-      <hr/>
-
+    <main
+      className="container"
+      style={{
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'stretch',
+        flexBasis: '100%',
+      }}
+    >
+      <CodeEditor onChange={setInputCode} />
       <Iframe outputCode={outputCode} />
-    </div>
+    </main>
   );
 }
 
