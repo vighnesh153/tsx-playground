@@ -23,5 +23,7 @@ export function CodePreview({ outputCode }: CodePreviewProps): JSX.Element {
     }, 50);
   }, [outputCode]);
 
-  return <iframe title="preview" style={{ width: '100%' }} ref={iframeRef} srcDoc={defaultHtml} />;
+  return (
+    <iframe title="preview" sandbox="allow-scripts" style={{ width: '100%' }} ref={iframeRef} srcDoc={defaultHtml} />
+  );
 }
