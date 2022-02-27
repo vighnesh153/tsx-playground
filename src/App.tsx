@@ -14,13 +14,22 @@ const html = `
 <body>
     <div id="root"></div>
     <script type="application/javascript">
+        function handleError(error) {
+          console.log(error.message);
+          const errorMessage = error.message;
+          document.body.innerHTML = \`
+            <div style="color: red; padding: 1rem">
+              \${errorMessage}
+            </div>
+          \`;
+        }
+    
         window.addEventListener("message", (e) => {
           try {
             eval(e.data);            
           } catch (e) {
-            console.log('Error caught');
             console.error(e);
-            document.getElementById("root").remove()
+            handleError(e);
           }
         })
     </script>
@@ -42,7 +51,7 @@ function Iframe({ outputCode }: { outputCode: string }) {
     }, 50);
   }, [outputCode]);
 
-  return <iframe title="preview" style={{width: '100%'}} ref={iframeRef} srcDoc={html} />;
+  return <iframe title="preview" style={{ width: '100%' }} ref={iframeRef} srcDoc={html} />;
 }
 
 function App() {
