@@ -34,3 +34,24 @@ export const defaultHtml = `
 </body>
 </html>
 `;
+
+export const defaultEditorCode = `import React from "react";
+import ReactDOM from "react-dom";
+
+// Learn more about this library here:
+// https://js-utils.vercel.app/modules.html
+import { isPrime } from "@vighnesh153/utils";
+
+const App = () => {
+  return (
+    <div>
+        <h1>Hi world from my React application.</h1>
+        <p>Is 42 Prime: <strong>{isPrime(42).toString()}</strong></p>
+        <p>Is 43 Prime: <strong>{isPrime(43).toString()}</strong></p>
+    </div>
+  );
+};
+
+const appRoot = document.getElementById("root");
+ReactDOM.render(<App />, appRoot);
+`;
