@@ -1,58 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { bundle } from './bundler';
 import { debounce } from './debounce';
 import { CodeEditor } from './CodeEditor';
-
-const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Iframe html</title>
-</head>
-<body>
-    <div id="root"></div>
-    <script type="application/javascript">
-        function handleError(error) {
-          console.log(error.message);
-          const errorMessage = error.message;
-          document.body.innerHTML = \`
-            <div style="color: red; padding: 1rem">
-              \${errorMessage}
-            </div>
-          \`;
-        }
-    
-        window.addEventListener("message", (e) => {
-          try {
-            eval(e.data);            
-          } catch (e) {
-            console.error(e);
-            handleError(e);
-          }
-        })
-    </script>
-</body>
-</html>
-`;
-
-function Iframe({ outputCode }: { outputCode: string }) {
-  const iframeRef = useRef<any>();
-
-  // send the code to iframe
-  useEffect(() => {
-    // reset the html doc
-    iframeRef.current.srcdoc = html;
-
-    // send output code as message, to the iframe
-    setTimeout(() => {
-      iframeRef.current.contentWindow.postMessage(outputCode);
-    }, 50);
-  }, [outputCode]);
-
-  return <iframe title="preview" style={{ width: '100%' }} ref={iframeRef} srcDoc={html} />;
-}
+import { CodePreview } from './CodePreview';
 
 function App() {
   const [inputCode, setInputCode] = useState('');
@@ -73,6 +24,7 @@ function App() {
   // compile the code on change
   useEffect(() => {
     setBundling(true);
+    setError('');
     debouncedBundle(inputCode);
   }, [debouncedBundle, inputCode]);
 
@@ -87,7 +39,7 @@ function App() {
       }}
     >
       <CodeEditor onChange={setInputCode} />
-      <Iframe outputCode={outputCode} />
+      <CodePreview outputCode={outputCode} />
     </main>
   );
 }
