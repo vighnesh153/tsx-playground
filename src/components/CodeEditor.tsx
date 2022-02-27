@@ -9,13 +9,20 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/theme/material-palenight.css';
 
-const defaultValue = `
-import React from "react"
-import ReactDOM from "react-dom"
+const defaultValue = `import React from "react";
+import ReactDOM from "react-dom";
+
+// Learn more about this library here:
+// https://js-utils.vercel.app/modules.html
+import { isPrime } from "@vighnesh153/utils";
 
 const App = () => {
   return (
-    <div>Hi world from my React application.</div>
+    <div>
+        <h1>Hi world from my React application.</h1>
+        <p>Is 42 Prime: <strong>{isPrime(42).toString()}</strong></p>
+        <p>Is 43 Prime: <strong>{isPrime(43).toString()}</strong></p>
+    </div>
   );
 };
 
