@@ -3,7 +3,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { defaultHtml } from './constants';
+import { defaultHtml } from '../utils/constants';
 
 export interface CodePreviewProps {
   outputCode: string;

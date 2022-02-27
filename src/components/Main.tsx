@@ -6,8 +6,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { CodeEditor } from './CodeEditor';
 import { CodePreview } from './CodePreview';
-import { debounce } from './debounce';
-import { bundle } from './bundler';
+import { debounce } from '../utils/debounce';
+import { bundle } from '../bundler';
 
 export function Main(): JSX.Element {
   const [inputCode, setInputCode] = useState('');
