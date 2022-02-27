@@ -4,6 +4,7 @@ import { bundle } from './bundler';
 import { debounce } from './debounce';
 import { CodeEditor } from './CodeEditor';
 import { CodePreview } from './CodePreview';
+import { Header } from './Header';
 
 function App() {
   const [inputCode, setInputCode] = useState('');
@@ -29,18 +30,21 @@ function App() {
   }, [debouncedBundle, inputCode]);
 
   return (
-    <main
-      className="container"
-      style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'stretch',
-        flexBasis: '100%',
-      }}
-    >
-      <CodeEditor onChange={setInputCode} />
-      <CodePreview outputCode={outputCode} />
-    </main>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Header />
+      <main
+        className="container"
+        style={{
+          flexGrow: 1,
+          display: 'flex',
+          alignItems: 'stretch',
+          flexBasis: '100%',
+        }}
+      >
+        <CodeEditor onChange={setInputCode} />
+        <CodePreview outputCode={outputCode} />
+      </main>
+    </div>
   );
 }
 
