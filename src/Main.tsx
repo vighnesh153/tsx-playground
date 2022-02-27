@@ -34,7 +34,6 @@ export function Main(): JSX.Element {
 
   return (
     <main
-      className="container"
       style={{
         flexGrow: 1,
         display: 'flex',
