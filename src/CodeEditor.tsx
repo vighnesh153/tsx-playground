@@ -32,7 +32,7 @@ export function CodeEditor({ onChange }: CodeEditorProps): JSX.Element | null {
 
   useEffect(() => {
     onChange(inputCode);
-  }, [inputCode]);
+  }, [onChange, inputCode]);
 
   return (
     <CodeMirror
