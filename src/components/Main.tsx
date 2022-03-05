@@ -42,7 +42,7 @@ export function Main(): JSX.Element {
       }}
     >
       <CodeEditor onChange={setInputCode} />
-      <CodePreview outputCode={outputCode} />
+      <CodePreview bundling={bundling} bundleError={error} outputCode={outputCode} />
     </main>
   );
 }
