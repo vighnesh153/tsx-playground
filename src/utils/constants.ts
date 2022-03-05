@@ -38,16 +38,20 @@ export const defaultHtml = `
 export const defaultEditorCode = `import React from "react";
 import ReactDOM from "react-dom";
 
-// Learn more about this library here:
+// Learn more about my library here:
 // https://js-utils.vercel.app/modules.html
 import { isPrime } from "@vighnesh153/utils";
 
 const App = () => {
+  const Strong = (text: any): React.ReactNode => {
+    return <strong>{text.toString()}</strong>
+  };
+
   return (
     <div>
-        <h1>Hi world from my React application.</h1>
-        <p>Is 42 Prime: <strong>{isPrime(42).toString()}</strong></p>
-        <p>Is 43 Prime: <strong>{isPrime(43).toString()}</strong></p>
+      <h1>Hi world from my React application.</h1>
+      <p>Is 42 Prime: {Strong(isPrime(42))}</p>
+      <p>Is 43 Prime: {Strong(isPrime(43))}</p>
     </div>
   );
 };
