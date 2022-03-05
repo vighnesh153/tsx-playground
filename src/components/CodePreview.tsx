@@ -24,6 +24,12 @@ export function CodePreview({ outputCode }: CodePreviewProps): JSX.Element {
   }, [outputCode]);
 
   return (
-    <iframe title="preview" sandbox="allow-scripts" style={{ width: '100%' }} ref={iframeRef} srcDoc={defaultHtml} />
+    <iframe
+      title="preview"
+      sandbox="allow-same-origin allow-scripts"
+      style={{ width: '100%' }}
+      ref={iframeRef}
+      srcDoc={defaultHtml}
+    />
   );
 }
