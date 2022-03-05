@@ -59,3 +59,7 @@ const App = () => {
 const appRoot = document.getElementById("root");
 ReactDOM.render(<App />, appRoot);
 `;
+
+export const namespaces = {
+  root: 'tsx.vighnesh153.com',
+};

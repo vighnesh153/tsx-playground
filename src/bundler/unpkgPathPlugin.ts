@@ -1,4 +1,5 @@
-import esbuild from "esbuild-wasm";
+import esbuild from 'esbuild-wasm';
+import { namespaces } from '../utils/constants';
 
 const unpkgRoot = 'https://unpkg.com';
 
@@ -10,30 +11,29 @@ export const unpkgPathPlugin = () => {
   return {
     name: 'unpkg-path-plugin',
     setup: (build: esbuild.PluginBuild) => {
-
       // Main entry file provided to "esbuild.build" command
-      build.onResolve({filter: /^index\.tsx$/}, () => {
+      build.onResolve({ filter: /^index\.tsx$/ }, () => {
         return {
-          namespace: 'vighnesh153',
+          namespace: namespaces.root,
           path: 'index.tsx',
         };
       });
 
       // Handle relative paths
-      build.onResolve({filter: /^.+\//}, (args: esbuild.OnResolveArgs) => {
+      build.onResolve({ filter: /^.+\// }, (args: esbuild.OnResolveArgs) => {
         return {
-          namespace: 'vighnesh153',
-          path: new URL(args.path, unpkgRoot + args.resolveDir + '/').href
+          namespace: namespaces.root,
+          path: new URL(args.path, unpkgRoot + args.resolveDir + '/').href,
         };
       });
 
       // Handle entry point of a module
-      build.onResolve({filter: /.*/}, async (args) => {
+      build.onResolve({ filter: /.*/ }, async (args) => {
         return {
-          namespace: 'vighnesh153',
+          namespace: namespaces.root,
           path: `${unpkgRoot}/${args.path}`,
         };
       });
     },
-  }
+  };
 };
