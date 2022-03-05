@@ -19,6 +19,8 @@ export function CodePreview({ bundling, bundleError, outputCode }: CodePreviewPr
   // send the code to iframe
   useEffect(() => {
     if (bundling) return;
+    if (bundleError) return;
+    if (!iframeRef.current) return;
 
     // reset the html doc
     iframeRef.current.srcdoc = defaultHtml;
@@ -27,14 +29,21 @@ export function CodePreview({ bundling, bundleError, outputCode }: CodePreviewPr
     setTimeout(() => {
       iframeRef.current?.contentWindow?.postMessage?.(outputCode);
     }, 50);
-  }, [outputCode, bundling]);
+  }, [outputCode, bundling, bundleError]);
 
   if (bundling) {
     return (
-      <div style={{ ...rootStyles, padding: '1rem' }}>
+      <div style={bundlingStyles}>
         <Spinner />
       </div>
     );
+  }
+
+  if (bundleError) {
+    return <div style={bundleErrorStyles}>
+      <div style={{fontWeight: 'bold', fontSize: '1.5rem'}}>Some error occurred while bundling</div>
+      <span>{bundleError}</span>
+    </div>;
   }
 
   return (
@@ -53,4 +62,16 @@ const rootStyles: React.CSSProperties = {
   borderWidth: 2,
   borderColor: 'initial',
   borderStyle: 'inset',
+};
+
+const bundlingStyles: React.CSSProperties = {
+  ...rootStyles,
+  padding: '1rem',
+};
+
+const bundleErrorStyles: React.CSSProperties = {
+  ...rootStyles,
+  padding: '1rem',
+  color: 'red',
+  whiteSpace: 'pre',
 };
