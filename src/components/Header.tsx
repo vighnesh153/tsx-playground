@@ -15,7 +15,7 @@ export function Header(): JSX.Element {
         alignItems: 'center',
       }}
     >
-      <span style={{ fontSize: '1.3rem' }}>A Typescript and React playground</span>
+      <span style={{ fontSize: '1.3em' }}>A Typescript and React playground</span>
       <span>Built with ❤️ by Vighnesh Raut</span>
     </header>
   );
