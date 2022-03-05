@@ -21,7 +21,7 @@ export function Main(): JSX.Element {
       setOutputCode(outputCode);
       setError(error);
       setBundling(false);
-    }, 2000),
+    }, 1000),
     []
   );
 
