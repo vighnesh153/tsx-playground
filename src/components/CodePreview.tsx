@@ -74,4 +74,5 @@ const bundleErrorStyles: React.CSSProperties = {
   padding: '1rem',
   color: 'red',
   whiteSpace: 'pre',
+  overflowX: 'auto',
 };

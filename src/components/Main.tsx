@@ -35,10 +35,9 @@ export function Main(): JSX.Element {
   return (
     <main
       style={{
-        flexGrow: 1,
+        height: 'calc(100vh - var(--header-height))',
         display: 'flex',
         alignItems: 'stretch',
-        flexBasis: '100%',
       }}
     >
       <CodeEditor onChange={setInputCode} />
