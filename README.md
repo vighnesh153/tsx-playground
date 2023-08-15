@@ -1,3 +1,9 @@
+<h1 style="padding: 20px; background: pink; border: 1px solid red; border-radius: 10px;">
+  PERMANENTLY MOVED HERE: <a href="https://github.com/vighnesh153/vighnesh153-monorepo/tree/main/nodejs-tools/nodejs-lib/tsx-bundler">Repository Link</a>
+</h1>
+
+---
+
 # Typescript and React playground
 
 [Visit the playground by clicking here](https://tsx.vighnesh153.com/)
